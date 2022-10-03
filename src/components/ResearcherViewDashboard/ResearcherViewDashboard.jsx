@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import './ResearcherViewDashboard.css'
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -12,12 +13,12 @@ function ResearcherView(props) {
 
   return (
     <div>
-      <h2>{heading}</h2>
+      <h1 className='centeredHeaders'>{heading}</h1>
       <h4>Institution: {store.username}</h4>
       <h2>Clinicians</h2>
-      {store.map(clinician => {
+      {/* {store.map(clinician => {
         
-      })}
+      })} */}
     </div>
   );
 }
