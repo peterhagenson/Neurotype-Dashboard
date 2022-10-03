@@ -13,7 +13,7 @@ CREATE TABLE "institution" (
 	"street_address" VARCHAR(255),
 	"city" VARCHAR(255),
 	"state" VARCHAR(2),
-	"zip" INT;
+	"zip" INT
 );
 
 CREATE TABLE "user" (
