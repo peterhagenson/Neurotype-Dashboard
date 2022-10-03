@@ -14,6 +14,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/clinicians', rejectUnauthenticated, (req, res) => {
+  const query = 'SELECT * FROM "user" ORDER BY "first_name" ASC';
+  pool.query(query)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error in getting clinician list for researcher', err);
+      res.sendStatus(500)
+    })
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
