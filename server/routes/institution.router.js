@@ -14,11 +14,12 @@ router.get('/', (req, res) => { // Get all institutions
 
 // to get the institution related to the logged in researcher
 router.get('/researchInst', (req, res) => {
+  console.log('the user who is logged in is', req.user);
   const query = `SELECT "institution".name FROM "institution"
   JOIN "user"
   ON "institution".id = "user".inst_id
-  WHERE "user".id = 1;`;
-  pool.query(query)
+  WHERE "user".id = $1;`;
+  pool.query(query,[req.user.id])
     .then(result => {
       res.send(result.rows);
     })
