@@ -37,7 +37,7 @@ import './App.css';
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector(store => store.user.userReducer);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -123,7 +123,7 @@ function App() {
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route exact path="/patientDetail/:id">
+          <Route exact path="/patientDetail">
             <PatientDetailPage />
           </Route>
           <Route exact path="/addPatientForm">
@@ -132,7 +132,7 @@ function App() {
           <Route exact path="/researcherViewDashboard">
             <ResearcherViewDashboard />
           </Route>
-          <Route exact path="/institutionViewDashboard">
+          <Route exact path="/institutionViewDashboard/:id">
             <InstitutionViewDashboard />
           </Route>
           <Route exact path="/manageAccounts">

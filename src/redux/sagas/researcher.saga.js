@@ -16,7 +16,7 @@ function* fetchClinicians() {
 function* fetchResearcherInst() {
     // get institution associated with researcher from the DB
     try {
-        const institution = yield axios.get('/api/institution/researchInst');
+        const institution = yield axios.get('/api/institutions/researchInst');
         console.log('get institution for researcher view:', institution.data);
         yield put({ type: 'SET_RESEARCHERINST', payload: institution.data });
     } catch {

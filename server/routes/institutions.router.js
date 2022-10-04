@@ -6,8 +6,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => { // Get all institutions
+    console.log('Institutions GET')
     const query = `
-        SELECT * FROM "institutions`
+        SELECT * FROM "institution"`
         pool.query(query)
 })
 
@@ -28,3 +29,5 @@ router.get('/researchInst', (req, res) => {
       res.sendStatus(500)
     })
 });
+
+module.exports = router
