@@ -18,7 +18,7 @@ function* fetchResearcherInst() {
     try {
         const institution = yield axios.get('/api/institutions/researchInst');
         console.log('get institution for researcher view:', institution.data);
-        yield put({ type: 'SET_RESEARCHERINST', payload: institution.data });
+        yield put({ type: 'SET_RESEARCHERINST', payload: institution.data[0] });
     } catch {
         console.log('fetch researcher inst saga error');
     }
