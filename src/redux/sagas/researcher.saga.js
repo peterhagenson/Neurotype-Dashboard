@@ -8,7 +8,19 @@ function* fetchClinicians() {
         console.log('get clinicians for researcher view:', clinicians.data);
         yield put({ type: 'SET_CLINICIANS', payload: clinicians.data });
     } catch {
-        console.log('fetch researcher saga error');
+        console.log('fetch researcher clinician list saga error');
+    }
+
+}
+
+function* fetchResearcherInst() {
+    // get institution associated with researcher from the DB
+    try {
+        const institution = yield axios.get('/api/institution/researchInst');
+        console.log('get institution for researcher view:', institution.data);
+        yield put({ type: 'SET_RESEARCHERINST', payload: institution.data });
+    } catch {
+        console.log('fetch researcher inst saga error');
     }
 
 }
@@ -27,7 +39,8 @@ function* fetchClinicians() {
 
 
 function* researcherSaga() {
-    yield takeEvery('FETCH_CLINICIANS', fetchClinicians)
+    yield takeEvery('FETCH_CLINICIANS', fetchClinicians),
+    yield takeEvery('FETCH_RESEARCHERINST', fetchResearcherInst)
     // yield takeEvery('APPROVE', approve)
 }
 

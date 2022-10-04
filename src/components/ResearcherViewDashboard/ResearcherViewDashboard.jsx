@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import './ResearcherViewDashboard.css'
 
 // Basic functional component structure for React with default state
@@ -8,17 +8,30 @@ import './ResearcherViewDashboard.css'
 function ResearcherView(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const store = useSelector((store) => store.user);
+  const clinicians = useSelector((store) => store.researcher.researcherReducer);
+  const store = useSelector((store) => store.researcher.researcherInstReducer);
+
   const [heading, setHeading] = useState('Researcher Dashboard');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_CLINICIANS' });
+  }, []);
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_RESEARCHERINST' });
+  }, []);
 
   return (
     <div>
       <h1 className='centeredHeaders'>{heading}</h1>
-      <h4>Institution: {store.username}</h4>
+      <h4>Institution: {store.name}</h4>
       <h2>Clinicians</h2>
-      {/* {store.map(clinician => {
-        
-      })} */}
+      {clinicians.map(clinician => {
+        return (
+          <p>{clinician.username}</p>
+        )
+      })}
     </div>
   );
 }

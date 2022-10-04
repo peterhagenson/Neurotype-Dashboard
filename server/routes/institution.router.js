@@ -10,3 +10,20 @@ router.get('/', (req, res) => { // Get all institutions
         SELECT * FROM "institutions`
         pool.query(query)
 })
+
+
+// to get the institution related to the logged in researcher
+router.get('/researchInst', (req, res) => {
+  const query = `SELECT "institution".name FROM "institution"
+  JOIN "user"
+  ON "institution".id = "user".inst_id
+  WHERE "user".id = 1;`;
+  pool.query(query)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error in getting clinician list for researcher', err);
+      res.sendStatus(500)
+    })
+});

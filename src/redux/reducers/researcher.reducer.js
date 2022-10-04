@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux';
+
+// stores clinicians from researcher team in redux state
 const researcherReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_CLINICIANS':
@@ -6,8 +9,19 @@ const researcherReducer = (state = [], action) => {
         return state;
     }
   };
+
+  const researcherInstReducer = (state = {}, action) => {
+    switch (action.type) {
+      case 'SET_RESEARCHERINST':
+        return action.payload;
+      default:
+        return state;
+    }
+  };
   
   // user will be on the redux state at:
   // state.user
-  export default researcherReducer;
-  
+  export default combineReducers({
+    researcherReducer,
+    researcherInstReducer,
+  });

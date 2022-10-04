@@ -14,7 +14,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-router.get('/clinicians', rejectUnauthenticated, (req, res) => {
+
+// this GET route is to get all clinicians associated with a researcher and institution
+router.get('/clinicians', (req, res) => {
   const query = 'SELECT * FROM "user" ORDER BY "first_name" ASC';
   pool.query(query)
     .then(result => {
